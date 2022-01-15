@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:trelloclone/TodoList.dart';
 
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(MaterialApp(home: MainScreen()));
@@ -55,27 +54,6 @@ class _MainScreenState extends State<MainScreen> {
   TextEditingController controller = TextEditingController();
 
   void _addTodoList(String name, List<Widget> todoLists) {
-    controller.text = name;
-    todoLists.add(Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.all(10),
-          width: 350,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: Colors.grey[400]!, width: 2),
-          ),
-          child: Column(
-            children: [
-              TextField(textAlign: TextAlign.center, controller: controller),
-              Text('Item1'),
-              Text('Item2'),
-            ],
-          ),
-        ),
-      ],
-    ));
+    todoLists.add(TodoList(name));
   }
 }
