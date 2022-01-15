@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TodoList extends StatefulWidget {
-  TodoList(this.name,{Key? key}) : super(key: key);
+  TodoList(this.name,{Key? key, VoidCallback? onItemChange}) : super(key: key);
   String? name;
 
   @override
