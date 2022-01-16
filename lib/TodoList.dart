@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trelloclone/todocard.dart';
 
 class TodoList extends StatefulWidget {
   TodoList(this.name,{Key? key, VoidCallback? onItemChange}) : super(key: key);
@@ -9,8 +10,15 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  List<Widget> _cards = [];
+  void cardChanged(){
+    print('Eine Karte hat sich geändert...');
+
+  }
+
+  List<Widget> _cards = [TodoCard('text',), TodoCard('text2',)];
   TextEditingController controller = TextEditingController();
+
+
 
   @override
   void initState() {
