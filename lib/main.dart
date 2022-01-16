@@ -33,15 +33,6 @@ class _MainScreenState extends State<MainScreen> {
           scrollDirection: Axis.horizontal,
           children: _todoLists,
         )
-        // child: ListView.builder(
-        //     controller: scrollController,
-        //     scrollDirection: Axis.horizontal,
-        //     padding: const EdgeInsets.all(8),
-        //     itemCount: _todoLists.length,
-        //     itemBuilder: (BuildContext context, int index) {
-        //
-        //     }
-        // ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),

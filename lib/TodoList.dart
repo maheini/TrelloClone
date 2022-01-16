@@ -10,10 +10,6 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  void cardChanged(){
-    print('Eine Karte hat sich geändert...');
-
-  }
 
   List<Widget> _cards = [TodoCard(text: 'text',), TodoCard(text: 'text2',)];
   TextEditingController controller = TextEditingController();
@@ -23,7 +19,6 @@ class _TodoListState extends State<TodoList> {
   @override
   void initState() {
     controller.text = widget.name?? '';
-    print(widget.name);
     super.initState();
   }
 
@@ -40,13 +35,23 @@ class _TodoListState extends State<TodoList> {
             borderRadius: BorderRadius.circular(4),
             border: Border.all(color: Colors.grey[400]!, width: 2),
           ),
-          child: Column(
-            children: [
-              TextField(textAlign: TextAlign.center, controller: controller),
-              Column(
-                children: _cards,
-              ),
-            ],
+          child: DragTarget(
+            onAccept: (item) {
+              if(item is TodoCard){
+                setState(() {
+                  _cards.add(item);
+                });
+              }},
+            builder: (context, candidateItems, rejectedItems) {
+              return Column(
+                children: [
+                  TextField(textAlign: TextAlign.center, controller: controller),
+                  Column(
+                    children: _cards,
+                  ),
+                ],
+              );
+            }
           ),
         ),
       ],

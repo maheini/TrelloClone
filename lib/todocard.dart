@@ -40,14 +40,23 @@ class _TodoCardState extends State<TodoCard> {
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      decoration: _textDecoration,
-      padding: const EdgeInsets.all(5),
-      child: TextField(
-        focusNode: focusNode,
-        decoration: const InputDecoration(border: InputBorder.none),
-        controller: controller,
+    return Draggable(
+      feedback: Container(
+        height: 40,
+        width: 350,
+        margin: const EdgeInsets.all(5),
+        decoration: _textDecoration,
+        padding: const EdgeInsets.all(5),
+      ),
+      child: Container(
+        margin: const EdgeInsets.all(5),
+        decoration: _textDecoration,
+        padding: const EdgeInsets.all(5),
+        child: TextField(
+          focusNode: focusNode,
+          decoration: const InputDecoration(border: InputBorder.none),
+          controller: controller,
+        ),
       ),
     );
   }
