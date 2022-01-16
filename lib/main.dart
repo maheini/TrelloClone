@@ -54,6 +54,6 @@ class _MainScreenState extends State<MainScreen> {
   TextEditingController controller = TextEditingController();
 
   void _addTodoList(String name, List<Widget> todoLists) {
-    todoLists.add(TodoList(name));
+    todoLists.add(TodoList(name: name));
   }
 }

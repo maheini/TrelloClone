@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trelloclone/todocard.dart';
 
 class TodoList extends StatefulWidget {
-  TodoList(this.name,{Key? key, VoidCallback? onItemChange}) : super(key: key);
+  TodoList({String? this.name, Key? key, VoidCallback? onItemChange}) : super(key: key);
   String? name;
 
   @override
@@ -15,7 +15,7 @@ class _TodoListState extends State<TodoList> {
 
   }
 
-  List<Widget> _cards = [TodoCard('text',), TodoCard('text2',)];
+  List<Widget> _cards = [TodoCard(text: 'text',), TodoCard(text: 'text2',)];
   TextEditingController controller = TextEditingController();
 
 
@@ -23,6 +23,7 @@ class _TodoListState extends State<TodoList> {
   @override
   void initState() {
     controller.text = widget.name?? '';
+    print(widget.name);
     super.initState();
   }
 

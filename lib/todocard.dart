@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TodoCard extends StatefulWidget {
-  TodoCard(String? text, {VoidCallback? onChanged, Key? key}) : super(key: key);
+  TodoCard({String? this.text, VoidCallback? onChanged, Key? key}) : super(key: key);
   String? text;
+
 
   @override
   _TodoCardState createState() => _TodoCardState();
