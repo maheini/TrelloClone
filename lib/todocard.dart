@@ -41,6 +41,7 @@ class _TodoCardState extends State<TodoCard> {
   @override
   Widget build(BuildContext context) {
     return Draggable(
+      data: widget,
       feedback: Container(
         height: 40,
         width: 350,
