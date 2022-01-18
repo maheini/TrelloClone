@@ -19,21 +19,17 @@ class _TodoCardState extends State<TodoCard> {
   );
   FocusNode focusNode = FocusNode();
 
-  bool ignorePointer = false;
-
   @override
   void initState() {
     widget.controller.text = widget.text?? '';
     focusNode.addListener(() => setState(() {
       if(focusNode.hasFocus){
-        ignorePointer = false;
         _textDecoration = BoxDecoration(
           color: Colors.black.withOpacity(0.15),
           borderRadius: const BorderRadius.all(Radius.circular(2)),
         );
       }
       else{
-        ignorePointer = true;
         _textDecoration = BoxDecoration(
           color: Colors.black.withOpacity(0.25),
           borderRadius: const BorderRadius.all(Radius.circular(2)),
@@ -61,13 +57,10 @@ class _TodoCardState extends State<TodoCard> {
           margin: const EdgeInsets.all(5),
           decoration: _textDecoration,
           padding: const EdgeInsets.all(5),
-          child: IgnorePointer(
-            ignoring: ignorePointer,
-            child: TextField(
-              focusNode: focusNode,
-              decoration: const InputDecoration(border: InputBorder.none),
-              controller: widget.controller,
-            ),
+          child: TextField(
+            focusNode: focusNode,
+            decoration: const InputDecoration(border: InputBorder.none),
+            controller: widget.controller,
           ),
         ),
       ),
