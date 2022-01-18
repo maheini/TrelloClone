@@ -19,29 +19,25 @@ class _TodoCardState extends State<TodoCard> {
   );
   FocusNode focusNode = FocusNode();
 
+  bool lock = true;
+
+
   @override
   void initState() {
     widget.controller.text = widget.text?? '';
-    // focusNode.addListener(() => setState(() {
-    //   if(focusNode.hasFocus){
-    //     _textDecoration = BoxDecoration(
-    //       color: Colors.black.withOpacity(0.15),
-    //       borderRadius: const BorderRadius.all(Radius.circular(2)),
-    //     );
-    //   }
-    //   else{
-    //     _textDecoration = BoxDecoration(
-    //       color: Colors.black.withOpacity(0.25),
-    //       borderRadius: const BorderRadius.all(Radius.circular(2)),
-    //     );
-    //   }
-    // }));
+    focusNode.addListener(() {
+      if(!focusNode.hasPrimaryFocus && !lock) {
+        setState(() {
+          lock = true;
+        });
+      }
+    });
+
     super.initState();
   }
   
   @override
   Widget build(BuildContext context) {
-    print('baue karte');
     return LayoutBuilder(
       builder: (context, constraints) => Draggable(
         onDragCompleted: widget.onChanged,
@@ -54,15 +50,26 @@ class _TodoCardState extends State<TodoCard> {
           height: 50,
         ),
         data: widget,
-        child: Container(
-          margin: const EdgeInsets.all(5),
-          decoration: _textDecoration,
-          padding: const EdgeInsets.all(5),
-          child: TextField(
-            focusNode: focusNode,
-            decoration: const InputDecoration(border: InputBorder.none),
-            controller: widget.controller,
-          ),
+        child: InkWell(
+          onTap: () {
+            if(lock){
+              setState(() {lock = false;});
+            }
+          },
+          child: IgnorePointer(
+            ignoring: lock,
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              decoration: _textDecoration,
+              padding: const EdgeInsets.all(5),
+              child: TextField(
+                autofocus: true,
+                focusNode: focusNode,
+                decoration: const InputDecoration(border: InputBorder.none),
+                controller: widget.controller,
+              ),
+            ),
+          )
         ),
       ),
     );
