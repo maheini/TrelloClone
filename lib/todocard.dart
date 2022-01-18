@@ -22,25 +22,26 @@ class _TodoCardState extends State<TodoCard> {
   @override
   void initState() {
     widget.controller.text = widget.text?? '';
-    focusNode.addListener(() => setState(() {
-      if(focusNode.hasFocus){
-        _textDecoration = BoxDecoration(
-          color: Colors.black.withOpacity(0.15),
-          borderRadius: const BorderRadius.all(Radius.circular(2)),
-        );
-      }
-      else{
-        _textDecoration = BoxDecoration(
-          color: Colors.black.withOpacity(0.25),
-          borderRadius: const BorderRadius.all(Radius.circular(2)),
-        );
-      }
-    }));
+    // focusNode.addListener(() => setState(() {
+    //   if(focusNode.hasFocus){
+    //     _textDecoration = BoxDecoration(
+    //       color: Colors.black.withOpacity(0.15),
+    //       borderRadius: const BorderRadius.all(Radius.circular(2)),
+    //     );
+    //   }
+    //   else{
+    //     _textDecoration = BoxDecoration(
+    //       color: Colors.black.withOpacity(0.25),
+    //       borderRadius: const BorderRadius.all(Radius.circular(2)),
+    //     );
+    //   }
+    // }));
     super.initState();
   }
   
   @override
   Widget build(BuildContext context) {
+    print('baue karte');
     return LayoutBuilder(
       builder: (context, constraints) => Draggable(
         onDragCompleted: widget.onChanged,
