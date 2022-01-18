@@ -39,7 +39,7 @@ class _TodoListState extends State<TodoList> {
             onAccept: (item) {
               if(item is TodoCard){
                 setState(() {
-                  widget._cards.add(item);
+                  // widget._cards.add(item);
                 });
               }},
             builder: (context, candidateItems, rejectedItems) {
@@ -49,12 +49,26 @@ class _TodoListState extends State<TodoList> {
                   Column(
                     children: widget._cards,
                   ),
-                  TextButton(
-                    onPressed: () => setState(() {
-                      widget._cards.add(TodoCard(key: UniqueKey(),text: 'NewCard'));
-                    }),
-                    child: Text('Eins hinzufügen...'),
-                  ),
+                  Container(
+                    height: 60,
+                    width: double.infinity,
+                    margin: EdgeInsets.all(5),
+                    child: TextButton(
+                      onPressed: () => setState(() {
+                        widget._cards.add(TodoCard(key: UniqueKey(),text: 'NewCard'));
+                      }),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.05)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.add),
+                          Container(width: 10,),
+                          const Text('Karte hinzufügen'),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               );
             }

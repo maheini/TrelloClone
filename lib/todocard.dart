@@ -13,7 +13,7 @@ class TodoCard extends StatefulWidget {
 }
 
 class _TodoCardState extends State<TodoCard> {
-  BoxDecoration _textDecoration = BoxDecoration(
+  final BoxDecoration _textDecoration = BoxDecoration(
     color: Colors.black.withOpacity(0.15),
     borderRadius: const BorderRadius.all(Radius.circular(2)),
   );
