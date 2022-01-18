@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TodoCard extends StatefulWidget {
-  TodoCard({String? this.text, VoidCallback? onChanged, Key? key}) : super(key: key);
+  TodoCard({this.text, this.onChanged, Key? key}) : super(key: key);
   String? text;
+  TextEditingController controller = TextEditingController();
+
+  final VoidCallback? onChanged;
 
 
   @override
@@ -10,25 +13,27 @@ class TodoCard extends StatefulWidget {
 }
 
 class _TodoCardState extends State<TodoCard> {
-  TextEditingController controller = TextEditingController();
   BoxDecoration _textDecoration = BoxDecoration(
     color: Colors.black.withOpacity(0.15),
     borderRadius: const BorderRadius.all(Radius.circular(2)),
   );
   FocusNode focusNode = FocusNode();
 
+  bool ignorePointer = false;
 
   @override
   void initState() {
-    controller.text = widget.text?? '';
+    widget.controller.text = widget.text?? '';
     focusNode.addListener(() => setState(() {
       if(focusNode.hasFocus){
+        ignorePointer = false;
         _textDecoration = BoxDecoration(
           color: Colors.black.withOpacity(0.15),
           borderRadius: const BorderRadius.all(Radius.circular(2)),
         );
       }
       else{
+        ignorePointer = true;
         _textDecoration = BoxDecoration(
           color: Colors.black.withOpacity(0.25),
           borderRadius: const BorderRadius.all(Radius.circular(2)),
@@ -40,23 +45,30 @@ class _TodoCardState extends State<TodoCard> {
   
   @override
   Widget build(BuildContext context) {
-    return Draggable(
-      data: widget,
-      feedback: Container(
-        height: 40,
-        width: 350,
-        margin: const EdgeInsets.all(5),
-        decoration: _textDecoration,
-        padding: const EdgeInsets.all(5),
-      ),
-      child: Container(
-        margin: const EdgeInsets.all(5),
-        decoration: _textDecoration,
-        padding: const EdgeInsets.all(5),
-        child: TextField(
-          focusNode: focusNode,
-          decoration: const InputDecoration(border: InputBorder.none),
-          controller: controller,
+    return LayoutBuilder(
+      builder: (context, constraints) => Draggable(
+        onDragCompleted: widget.onChanged,
+        feedback: Container (
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(3),
+            color: Colors.black.withOpacity(0.4),
+          ),
+          width: constraints.maxWidth,
+          height: 50,
+        ),
+        data: widget,
+        child: Container(
+          margin: const EdgeInsets.all(5),
+          decoration: _textDecoration,
+          padding: const EdgeInsets.all(5),
+          child: IgnorePointer(
+            ignoring: ignorePointer,
+            child: TextField(
+              focusNode: focusNode,
+              decoration: const InputDecoration(border: InputBorder.none),
+              controller: widget.controller,
+            ),
+          ),
         ),
       ),
     );

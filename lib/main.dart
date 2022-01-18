@@ -17,6 +17,8 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _todoLists = [];
   ScrollController scrollController = ScrollController();
 
+  int counter = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +39,8 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => setState(() {
-          _addTodoList('name', _todoLists);
+          _addTodoList('name $counter', _todoLists);
+          counter++;
         })
       ),
     );
@@ -45,6 +48,6 @@ class _MainScreenState extends State<MainScreen> {
   TextEditingController controller = TextEditingController();
 
   void _addTodoList(String name, List<Widget> todoLists) {
-    todoLists.add(TodoList(name: name));
+    todoLists.add(TodoList(key: UniqueKey(), name: name,));
   }
 }

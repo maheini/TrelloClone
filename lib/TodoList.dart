@@ -4,6 +4,7 @@ import 'package:trelloclone/todocard.dart';
 class TodoList extends StatefulWidget {
   TodoList({String? this.name, Key? key, VoidCallback? onItemChange}) : super(key: key);
   String? name;
+  List<Widget> _cards = [];
 
   @override
   _TodoListState createState() => _TodoListState();
@@ -11,7 +12,6 @@ class TodoList extends StatefulWidget {
 
 class _TodoListState extends State<TodoList> {
 
-  List<Widget> _cards = [TodoCard(text: 'text',), TodoCard(text: 'text2',)];
   TextEditingController controller = TextEditingController();
 
 
@@ -39,7 +39,7 @@ class _TodoListState extends State<TodoList> {
             onAccept: (item) {
               if(item is TodoCard){
                 setState(() {
-                  _cards.add(item);
+                  widget._cards.add(item);
                 });
               }},
             builder: (context, candidateItems, rejectedItems) {
@@ -47,7 +47,13 @@ class _TodoListState extends State<TodoList> {
                 children: [
                   TextField(textAlign: TextAlign.center, controller: controller),
                   Column(
-                    children: _cards,
+                    children: widget._cards,
+                  ),
+                  TextButton(
+                    onPressed: () => setState(() {
+                      widget._cards.add(TodoCard(key: UniqueKey(),text: 'NewCard'));
+                    }),
+                    child: Text('Eins hinzufügen...'),
                   ),
                 ],
               );
