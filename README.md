@@ -1,16 +1,18 @@
-# trelloclone
+[![Website](https://img.shields.io/badge/Web-neofix.ch-brightgreen?style=for-the-badge)](https://neofix.ch)
+[![GitHub](https://img.shields.io/github/license/maheini35/carbpro?style=for-the-badge&color=blue)](LICENSE)
+![GitHub top language](https://img.shields.io/github/languages/top/maheini/carbpro?style=for-the-badge&color=blue)
+![Visitor count](https://shields-io-visitor-counter.herokuapp.com/badge?page=maheini.TrelloClone&style=for-the-badge&color=blue)
+![Platform](https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge)
 
-A new Flutter project.
+# About TrelloClone
 
-## Getting Started
+An Trello clone, started as a learning project.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Feature requested or Issue found?
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Feel free to modify, fork or commit :)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## License & copyright
+ 
+Licensed under the [GPLv3 License](LICENSE).
