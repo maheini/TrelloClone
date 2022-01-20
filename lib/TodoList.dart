@@ -50,9 +50,9 @@ class _TodoListState extends State<TodoList> {
                     children: widget._cards,
                   ),
                   Container(
-                    height: 60,
+                    height: 40,
                     width: double.infinity,
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                     child: TextButton(
                       onPressed: () => setState(() {
                         widget._cards.add(TodoCard(key: UniqueKey(),text: 'NewCard'));
@@ -64,7 +64,7 @@ class _TodoListState extends State<TodoList> {
                         children: [
                           const Icon(Icons.add),
                           Container(width: 10,),
-                          const Text('Karte hinzufügen'),
+                          const Text('add card'),
                         ],
                       ),
                     ),
