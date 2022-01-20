@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:trelloclone/TodoList.dart';
 
@@ -29,15 +30,21 @@ class _MainScreenState extends State<MainScreen> {
         title: Text('TrelloClone  ${_todoLists.length}'),
         centerTitle: true,
       ),
-      body: Scrollbar(
-        isAlwaysShown: true,
-        controller: scrollController,
-        child: ListView(
-          key: UniqueKey(),
-          controller: scrollController,
-          scrollDirection: Axis.horizontal,
-          children: _todoLists,
-        )
+      body: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+        },),
+        child: Scrollbar(
+            isAlwaysShown: true,
+            controller: scrollController,
+            child: ListView(
+              key: UniqueKey(),
+              controller: scrollController,
+              scrollDirection: Axis.horizontal,
+              children: _todoLists,
+            )
+        ),
       ),
     );
   }
