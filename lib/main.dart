@@ -4,7 +4,7 @@ import 'package:trelloclone/TodoList.dart';
 
 
 void main() {
-  runApp(MaterialApp(home: MainScreen()));
+  runApp(const MaterialApp(home: MainScreen()));
 }
 
 class MainScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List<Widget> _todoLists = [];
+  final List<Widget> _todoLists = [];
   ScrollController scrollController = ScrollController();
 
   int counter = 1;
@@ -42,6 +42,7 @@ class _MainScreenState extends State<MainScreen> {
               controller: scrollController,
               scrollDirection: Axis.horizontal,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: _todoLists,
               ),
             )
@@ -51,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
         onPressed: () => setState(() {
 
         }),
-        child: Icon(Icons.loop),
+        child: const Icon(Icons.loop),
       ),
     );
   }
