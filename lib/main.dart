@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('TrelloClone  ${_todoLists.length}'),
+        title: const Text('TrelloClone'),
         centerTitle: true,
       ),
       body: ScrollConfiguration(

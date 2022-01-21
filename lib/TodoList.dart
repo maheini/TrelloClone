@@ -11,10 +11,7 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList>{
-
   TextEditingController controller = TextEditingController();
-
-
 
   @override
   void initState() {
@@ -46,7 +43,16 @@ class _TodoListState extends State<TodoList>{
             builder: (context, candidateItems, rejectedItems) {
               return Column(
                 children: [
-                  TextField(autofocus: true, textAlign: TextAlign.center, controller: controller),
+                  TextField(
+                    autofocus: true,
+                    textAlign: TextAlign.center,
+                    controller: controller,
+                    decoration: const InputDecoration(border: InputBorder.none),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
                   Column(
                     children: widget._cards,
                   ),
