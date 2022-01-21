@@ -10,7 +10,10 @@ class TodoList extends StatefulWidget {
   _TodoListState createState() => _TodoListState();
 }
 
-class _TodoListState extends State<TodoList> {
+class _TodoListState extends State<TodoList> with AutomaticKeepAliveClientMixin<TodoList> {
+
+  @override
+  bool get wantKeepAlive => true;
 
   TextEditingController controller = TextEditingController();
 
@@ -20,10 +23,13 @@ class _TodoListState extends State<TodoList> {
   void initState() {
     controller.text = widget.name?? '';
     super.initState();
+    print('state wird erstellt');
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Column(
       children: [
         Container(
