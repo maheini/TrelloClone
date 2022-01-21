@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trelloclone/todocard.dart';
 
 class TodoList extends StatefulWidget {
-  TodoList({String? this.name, Key? key, VoidCallback? onItemChange}) : super(key: key);
+  TodoList({this.name, Key? key, VoidCallback? onItemChange}) : super(key: key);
   String? name;
   List<Widget> _cards = [];
 
@@ -17,42 +17,36 @@ class _TodoListState extends State<TodoList>{
   void initState() {
     controller.text = widget.name?? '';
     super.initState();
-    print('state wird erstellt');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.all(10),
-          width: 350,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: Colors.grey[400]!, width: 2),
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      width: 350,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: Colors.grey[400]!, width: 2),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            autofocus: true,
+            textAlign: TextAlign.center,
+            controller: controller,
+            decoration: const InputDecoration(border: InputBorder.none),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
-          child: DragTarget(
-            onAccept: (item) {
-              if(item is TodoCard){
-                setState(() {
-                  // widget._cards.add(item);
-                });
-              }},
-            builder: (context, candidateItems, rejectedItems) {
-              return Column(
+          Flexible(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  TextField(
-                    autofocus: true,
-                    textAlign: TextAlign.center,
-                    controller: controller,
-                    decoration: const InputDecoration(border: InputBorder.none),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
                   Column(
                     children: widget._cards,
                   ),
@@ -75,13 +69,13 @@ class _TodoListState extends State<TodoList>{
                         ],
                       ),
                     ),
-                  )
-                ],
-              );
-            }
+                  ),
+                ]
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      )
     );
   }
 }
