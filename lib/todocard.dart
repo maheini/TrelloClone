@@ -19,7 +19,7 @@ class _TodoCardState extends State<TodoCard> {
   );
   FocusNode focusNode = FocusNode();
 
-  bool lock = true;
+  bool lock = false;
 
 
   @override

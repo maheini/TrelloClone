@@ -56,7 +56,7 @@ class _TodoListState extends State<TodoList>{
                     margin: const EdgeInsets.all(5),
                     child: TextButton(
                       onPressed: () => setState(() {
-                        widget._cards.add(TodoCard(key: UniqueKey(),text: 'NewCard'));
+                        widget._cards.add(TodoCard());
                       }),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.05)),
