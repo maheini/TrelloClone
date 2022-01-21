@@ -46,7 +46,7 @@ class _TodoListState extends State<TodoList>{
             builder: (context, candidateItems, rejectedItems) {
               return Column(
                 children: [
-                  TextField(textAlign: TextAlign.center, controller: controller),
+                  TextField(autofocus: true, textAlign: TextAlign.center, controller: controller),
                   Column(
                     children: widget._cards,
                   ),
