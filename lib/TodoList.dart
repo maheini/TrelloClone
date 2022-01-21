@@ -13,6 +13,14 @@ class TodoList extends StatefulWidget {
 class _TodoListState extends State<TodoList>{
   TextEditingController controller = TextEditingController();
 
+  ScrollController scrollController = ScrollController();
+  bool scrollToEnd = false;
+  void scroll(){
+    if(scrollToEnd){
+      scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    }
+  }
+
   @override
   void initState() {
     controller.text = widget.name?? '';
@@ -21,6 +29,7 @@ class _TodoListState extends State<TodoList>{
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) => scroll());
     return Container(
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(10),
@@ -45,6 +54,7 @@ class _TodoListState extends State<TodoList>{
           ),
           Flexible(
             child: SingleChildScrollView(
+              controller: scrollController,
               child: Column(
                 children: [
                   Column(
@@ -57,6 +67,7 @@ class _TodoListState extends State<TodoList>{
                     child: TextButton(
                       onPressed: () => setState(() {
                         widget._cards.add(TodoCard());
+                        scrollToEnd = true;
                       }),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.05)),
