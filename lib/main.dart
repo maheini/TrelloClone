@@ -38,13 +38,20 @@ class _MainScreenState extends State<MainScreen> {
         child: Scrollbar(
             isAlwaysShown: true,
             controller: scrollController,
-            child: ListView(
-              key: UniqueKey(),
+            child: SingleChildScrollView(
               controller: scrollController,
               scrollDirection: Axis.horizontal,
-              children: _todoLists,
+              child: Row(
+                children: _todoLists,
+              ),
             )
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() {
+
+        }),
+        child: Icon(Icons.loop),
       ),
     );
   }
@@ -90,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _addTodoList(String name, List<Widget> todoLists) {
-    todoLists.last = TodoList(key: UniqueKey(), name: name,);
+    todoLists.last = TodoList(name: name,);
 
     _addNewListButton(todoLists);
   }
