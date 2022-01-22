@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TodoCard extends StatefulWidget {
-  TodoCard({this.text, this.onChanged, Key? key}) : super(key: key);
-  String? text;
-  TextEditingController controller = TextEditingController();
+  TodoCard({this.text = '', this.onChanged, Key? key}) : super(key: key);
+  String text;
 
   final VoidCallback? onChanged;
 
@@ -13,6 +12,7 @@ class TodoCard extends StatefulWidget {
 }
 
 class _TodoCardState extends State<TodoCard> {
+  TextEditingController controller = TextEditingController();
   final BoxDecoration _textDecoration = BoxDecoration(
     color: Colors.black.withOpacity(0.15),
     borderRadius: const BorderRadius.all(Radius.circular(2)),
@@ -24,9 +24,10 @@ class _TodoCardState extends State<TodoCard> {
 
   @override
   void initState() {
-    widget.controller.text = widget.text?? '';
+    controller.text = widget.text;
     focusNode.addListener(() {
       if(!focusNode.hasPrimaryFocus && !lockEditing) {
+        widget.text = controller.text;
         setState(() {
           lockEditing = true;
         });
@@ -65,9 +66,9 @@ class _TodoCardState extends State<TodoCard> {
               padding: const EdgeInsets.all(5),
               child: TextField(
                 autofocus: true,
+                controller: controller,
                 focusNode: focusNode,
                 decoration: const InputDecoration(border: InputBorder.none),
-                controller: widget.controller,
               ),
             ),
           )
