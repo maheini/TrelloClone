@@ -55,40 +55,40 @@ class _TodoListState extends State<TodoList>{
           Flexible(
             child: SingleChildScrollView(
               controller: scrollController,
-              child: Column(
-                children: [
-                  DragTarget<TodoCard>(
-                    builder: (context, candidateItems, rejectedItems) {
-                      return Column(
+              child: DragTarget<TodoCard>(
+                builder: (context, candidateItems, rejectedItems) {
+                  return Column(
+                    children: [
+                      Column(
                         children: widget._cards,
-                      );
-                    },
-                    onAccept: (item) {
-                      widget._cards.add(item);
-                    }
-                  ),
-                  Container(
-                    height: 40,
-                    width: double.infinity,
-                    margin: const EdgeInsets.all(5),
-                    child: TextButton(
-                      onPressed: () => setState(() {
-                        widget._cards.add(TodoCard());
-                        scrollToEnd = true;
-                      }),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.05)),
                       ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.add),
-                          Container(width: 10,),
-                          const Text('add card'),
-                        ],
+                      Container(
+                        height: 40,
+                        width: double.infinity,
+                        margin: const EdgeInsets.all(5),
+                        child: TextButton(
+                          onPressed: () => setState(() {
+                            widget._cards.add(TodoCard());
+                            scrollToEnd = true;
+                          }),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.05)),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.add),
+                              Container(width: 10,),
+                              const Text('add card'),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ]
+                    ]
+                  );
+                },
+                onAccept: (item) {
+                  widget._cards.add(item);
+                }
               ),
             ),
           ),
