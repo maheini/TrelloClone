@@ -57,8 +57,15 @@ class _TodoListState extends State<TodoList>{
               controller: scrollController,
               child: Column(
                 children: [
-                  Column(
-                    children: widget._cards,
+                  DragTarget<TodoCard>(
+                    builder: (context, candidateItems, rejectedItems) {
+                      return Column(
+                        children: widget._cards,
+                      );
+                    },
+                    onAccept: (item) {
+                      widget._cards.add(item);
+                    }
                   ),
                   Container(
                     height: 40,
