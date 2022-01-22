@@ -65,9 +65,12 @@ class _TodoCardState extends State<TodoCard> {
               decoration: _textDecoration,
               padding: const EdgeInsets.all(5),
               child: TextField(
+                keyboardType: TextInputType.text,
+                maxLines: null,
                 autofocus: true,
                 controller: controller,
                 focusNode: focusNode,
+                onSubmitted: (text) {FocusScope.of(context).unfocus();},
                 decoration: const InputDecoration(border: InputBorder.none),
               ),
             ),
