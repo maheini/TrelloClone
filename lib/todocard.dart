@@ -19,16 +19,16 @@ class _TodoCardState extends State<TodoCard> {
   );
   FocusNode focusNode = FocusNode();
 
-  bool lock = false;
+  bool lockEditing = false;
 
 
   @override
   void initState() {
     widget.controller.text = widget.text?? '';
     focusNode.addListener(() {
-      if(!focusNode.hasPrimaryFocus && !lock) {
+      if(!focusNode.hasPrimaryFocus && !lockEditing) {
         setState(() {
-          lock = true;
+          lockEditing = true;
         });
       }
     });
@@ -52,12 +52,13 @@ class _TodoCardState extends State<TodoCard> {
         data: widget,
         child: InkWell(
           onTap: () {
-            if(lock){
-              setState(() {lock = false;});
+            if(lockEditing){
+              setState(() {lockEditing = false;});
+              FocusScope.of(context).requestFocus(focusNode);
             }
           },
           child: IgnorePointer(
-            ignoring: lock,
+            ignoring: lockEditing,
             child: Container(
               margin: const EdgeInsets.all(5),
               decoration: _textDecoration,
