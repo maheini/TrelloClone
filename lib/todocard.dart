@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TodoCard extends StatefulWidget {
-  TodoCard({this.text = '', this.onChanged, Key? key}) : super(key: key);
+  TodoCard({this.text = '', this.onDropped, Key? key}) : super(key: key);
   String text;
 
-  final VoidCallback? onChanged;
-
+  final Function(TodoCard)? onDropped;
 
   @override
   _TodoCardState createState() => _TodoCardState();
@@ -41,7 +40,7 @@ class _TodoCardState extends State<TodoCard> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Draggable(
-        onDragCompleted: widget.onChanged,
+        onDragCompleted: () => widget.onDropped?.call(widget),
         feedback: Container (
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(3),

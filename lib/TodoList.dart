@@ -68,7 +68,7 @@ class _TodoListState extends State<TodoList>{
                         margin: const EdgeInsets.all(5),
                         child: TextButton(
                           onPressed: () => setState(() {
-                            widget._cards.add(TodoCard());
+                            widget._cards.add(generateCard(''));
                             scrollToEnd = true;
                           }),
                           style: ButtonStyle(
@@ -87,13 +87,27 @@ class _TodoListState extends State<TodoList>{
                   );
                 },
                 onAccept: (item) {
-                  widget._cards.add(item);
+                  setState(() {
+                    widget._cards.add(generateCard(item.text));
+                  });
                 }
               ),
             ),
           ),
         ],
       )
+    );
+  }
+
+  TodoCard generateCard(String text){
+    return TodoCard(
+      key: UniqueKey(),
+      text: text,
+      onDropped: (card) {
+        setState(() {
+          widget._cards.remove(card);
+        });
+      }
     );
   }
 }
