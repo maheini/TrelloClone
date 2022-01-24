@@ -18,8 +18,6 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _todoLists = [];
   ScrollController scrollController = ScrollController();
 
-  int counter = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +54,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-  TextEditingController controller = TextEditingController();
 
   Widget _addListButton(){
     return Container(
