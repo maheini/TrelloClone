@@ -59,9 +59,7 @@ class _TodoListState extends State<TodoList>{
                 builder: (context, candidateItems, rejectedItems) {
                   return Column(
                     children: [
-                      Column(
-                        children: widget._cards,
-                      ),
+                      ...widget._cards,
                       Container(
                         height: 40,
                         width: double.infinity,

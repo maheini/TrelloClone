@@ -22,9 +22,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if(_todoLists.isEmpty){
-      _addNewListButton(_todoLists);
-    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('TrelloClone'),
@@ -43,7 +40,10 @@ class _MainScreenState extends State<MainScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: _todoLists,
+                children: [
+                  ..._todoLists,
+                  _addListButton()
+                ],
               ),
             )
         ),
@@ -58,48 +58,39 @@ class _MainScreenState extends State<MainScreen> {
   }
   TextEditingController controller = TextEditingController();
 
-  void _addNewListButton(List<Widget> todoLists){
-    Widget addNewListButton = Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.all(10),
-          width: 350,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: Colors.grey[400]!, width: 2),
+  Widget _addListButton(){
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      width: 350,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(color: Colors.grey[400]!, width: 2),
+      ),
+      child: Container(
+        height: 40,
+        width: double.infinity,
+        margin: const EdgeInsets.all(5),
+        child: TextButton(
+          onPressed: () => setState(() {
+            _addTodoList('', _todoLists);
+          }),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.05)),
           ),
-          child: Container(
-            height: 40,
-            width: double.infinity,
-            margin: const EdgeInsets.all(5),
-            child: TextButton(
-              onPressed: () => setState(() {
-                _addTodoList('', todoLists);
-              }),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.05)),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.add),
-                  Container(width: 10,),
-                  const Text('add list'),
-                ],
-              ),
-            ),
+          child: Row(
+            children: [
+              const Icon(Icons.add),
+              Container(width: 10,),
+              const Text('add list'),
+            ],
           ),
         ),
-      ],
+      ),
     );
-
-    todoLists.add(addNewListButton);
   }
 
-  void _addTodoList(String name, List<Widget> todoLists) {
-    todoLists.last = TodoList(name: name,);
-
-    _addNewListButton(todoLists);
-  }
+  void _addTodoList(String name, List<Widget> todoLists)
+    => todoLists.add(TodoList(name: name,));
 }
